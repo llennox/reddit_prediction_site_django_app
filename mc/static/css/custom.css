@@ -13,7 +13,7 @@ html {width:100%;overflow-x: hidden;}
         
 }
 
-
+.generictext{font-family: Ubuntu, sans-serif;font-size:110%;color:white;}
 .spacer {margin-bottom:22%;height:30%;width:100%;}
 .push {height:20px;}
 footer {height:20px;color:white; bottom:0; float:left;left:0;}
