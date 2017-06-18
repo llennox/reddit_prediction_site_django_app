@@ -1,0 +1,178 @@
+#sign-up{ margin-bottom:2%;margin-top:2%}
+
+
+html {width:100%;overflow-x: hidden;}
+
+#signIn {color:white;margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;}
+
+.login {
+        width:20%;
+        top:0;
+        right:0;
+        position:absolute;
+        
+}
+
+
+.spacer {margin-bottom:22%;height:30%;width:100%;}
+.push {height:20px;}
+footer {height:20px;color:white; bottom:0; float:left;left:0;}
+footer a {color:#777777;}
+footer a:hover {color:orange;}
+#mytable td {background-color:white;font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
+
+#mytable tr {background-color:white;font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
+
+
+
+#signIn:hover {margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;text-decoration:none;color:#ff6600;}
+
+.active {color:#258058}
+
+.logoimg {margin-top:3%;width:750px;height:158px;}
+
+
+.tradelabel {color:white;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
+
+#id_subreddits {background-color:white;color:black;font-family: Ubuntu, sans-serif;font-size:180%;font-weight:bold;}
+
+
+
+#pills li a {color:white;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
+
+#pills .active a {background-color:#258058;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
+
+
+
+#pills {margin-top:-9%; position:relative;}
+
+
+
+
+
+form input {margin:1% 0 1% 0;}
+
+.userlabel {color:white;}
+
+.allText {color:white;}
+
+.background{ 
+    background-color: #204367;
+    width:auto;
+    height:100%;
+    margin 0 0 0 0;
+    overflow-x: hidden; 
+}
+
+
+.landing-container {
+    background-color: #f9f9f9;
+    border: 2px inset #777777;
+    width:75%;
+    margin: 0 auto;
+    border-radius:5px;
+    margin-top:-3%;
+    
+}
+
+
+.landing-header1 {
+    font-weight: bold;
+    font-family: Ubuntu, sans-serif;
+    margin-top:4%;
+      
+}
+
+
+.landing-header2 {
+    color:white;
+    font-family: Ubuntu, sans-serif;
+    margin-top:4%;
+}
+
+.contentBorder1 { 
+    opacity:0.8;   
+    text-align: center; 
+    width:auto;
+    margin-top:9%;
+    margin-bottom:4%;
+}
+.contentBorder { 
+    min-height:100%;   
+    text-align: center; 
+    opacity:0.8;
+       
+    width:auto;
+    margin-top:9%; 
+    
+}
+
+.sk-cube-grid {
+  width: 150px;
+  height: 150px;
+  margin: 100px auto;
+  margin-bottom: 10%;
+}
+
+
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: #333;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+          animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
+}
+
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); 
+  }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1);
+  } 
+}
+
+
+
+

@@ -1,0 +1,188 @@
+/* base */
+
+
+.Logoimg{
+    margin-left: 8%;
+    margin-right: auto;
+}
+
+.text{
+    text-align:center;
+    font-size: 150%;
+    color: black;
+    text-shadow: 1px 1px 2px #9e38d9;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.textme{
+    float:left;
+    font-size: 150%;
+    color: black;
+    text-shadow: 1px 1px 2px #9e38d9;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.abouttext{
+    display: inline-block;
+    font-size: 300%;
+    color: black;
+    font-family: Ubuntu, sans-serif;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+.abouttext:hover {
+    display: inline-block;
+    font-size: 300%;
+    color: black;
+    font-family: Ubuntu, sans-serif;
+    margin-left: 3%;
+    margin-right: 3%;
+    text-shadow: 1px 1px 2px #9e38d9;
+}
+
+.bltext {
+    display: inline-block;
+    font-size: 150%;
+    color: black;
+    font-family: Ubuntu, sans-serif;
+    margin-left: 25%;
+
+}
+
+.urlForm {
+    margin-top: 5%;
+    text-align:center;
+    font-size: 150%;
+    color: black;
+    text-shadow: 1px 1px 2px #9e38d9;
+    margin-left: 8%;
+    margin-right: 5px;
+    display: inline-block;
+    
+}
+
+.myurlForm {
+    margin-top: 5%;
+    text-align:center;
+    display: inline-block;
+    font-size: 150%;
+}
+
+.newSearch{
+    margin-top: 5%;
+    text-align:center;
+    display: inline-block;
+    font-size: 200% !important; 
+}
+
+* {
+    margin: 0;
+    }
+
+html, body {
+    height: 100%;
+    }
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -2em;
+    }
+
+.push {
+    height: 4em;
+} 
+
+
+.footer {
+    height: 2em;
+    background-color: black;
+    
+    }
+
+.footerText {
+    margin-left: 12%;
+    margin-top: 3px;
+    color: #cdadbe;
+    font-size: 110%;
+}
+
+
+.sk-cube-grid {
+  width: 150px;
+  height: 150px;
+  margin: 100px auto;
+  margin-bottom: 10%;
+}
+
+
+
+.sk-cube-grid .sk-cube {
+  width: 33%;
+  height: 33%;
+  background-color: #333;
+  float: left;
+  -webkit-animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out;
+          animation: sk-cubeGridScaleDelay 1.3s infinite ease-in-out; 
+}
+.sk-cube-grid .sk-cube1 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube2 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube3 {
+  -webkit-animation-delay: 0.4s;
+          animation-delay: 0.4s; }
+.sk-cube-grid .sk-cube4 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube5 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+.sk-cube-grid .sk-cube6 {
+  -webkit-animation-delay: 0.3s;
+          animation-delay: 0.3s; }
+.sk-cube-grid .sk-cube7 {
+  -webkit-animation-delay: 0s;
+          animation-delay: 0s; }
+.sk-cube-grid .sk-cube8 {
+  -webkit-animation-delay: 0.1s;
+          animation-delay: 0.1s; }
+.sk-cube-grid .sk-cube9 {
+  -webkit-animation-delay: 0.2s;
+          animation-delay: 0.2s; }
+
+@-webkit-keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1); 
+  }
+}
+
+@keyframes sk-cubeGridScaleDelay {
+  0%, 70%, 100% {
+    -webkit-transform: scale3D(1, 1, 1);
+            transform: scale3D(1, 1, 1);
+  } 35% {
+    -webkit-transform: scale3D(0, 0, 1);
+            transform: scale3D(0, 0, 1);
+  } 
+}
+/* searh */
+
+/* detail */
+
+/* guestServices */
+
+/* about */
+
+/* contact */
+
+
+/* book */

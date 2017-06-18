@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %}
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101028073-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<div class="contentBorder1">
+<form class="form-inline" action="/email/" method="post" enctype="multipart/form-data">
+    {{ form.non_field_errors }}
+    {% csrf_token %}
+    <div class="tradewrapper">
+    <label class="tradelabel">Sign up for email updates</label>
+        {{ form.aemail.errors }}
+
+        {{ form.aemail }}
+    
+    </div>
+<button type="submit" id="sign-up" class="btn btn-success btn-lg">
+<i class="fa fa fa-envelope"></i>&nbsp;Sign up</button>
+{% if Posts %}
+	<table class="table">
+ 		<tr>
+		    <th>Subreddit</th>
+		    <th>Title/Link</th> 
+		    <th>% chance of making /r/all</th> 
+  		</tr>
+{% for post in Posts %}
+  		<tr>
+                    
+		    <td>{{post.subreddit}}</td>
+		    <td><a href={{post.permalink}}>{{post.title}}</a></td> 
+		    <td>{{post.rating}}</td>
+  		</tr>
+{% endfor %}
+	</table>
+{%endif%}
+</div>
+
+
+{% endblock %}

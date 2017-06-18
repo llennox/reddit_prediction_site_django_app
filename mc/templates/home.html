@@ -1,0 +1,145 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %}
+<title>reddit post prediction</title>
+<body class="background">
+<div class="login">
+
+
+ 
+</div>
+<div class="contentBorder">
+  <ul class="nav nav-tabs" id="pills">
+    <li class="active"><a data-toggle="tab" href="#home">Search</a></li>
+    <!--<li><a data-toggle="tab" href="#subreddit1">Menu 1</a></li>
+    <li><a data-toggle="tab" href="#subreddit2">Menu 2</a></li>
+    <li><a data-toggle="tab" href="#subreddit3">Menu 3</a></li>
+    <li><a data-toggle="tab" href="#subreddit4">Menu 4</a></li>-->
+    {% if request.user.is_authenticated %}
+
+    <p>welcome back, {{ request.user.username }}
+    <a href="{% url 'logout_view' %}" id="signIn"><i class="fa fa-sign-out" aria-hidden="true"></i>
+    Log out</a>
+{% else %}
+    <a href="{% url 'sign_page' %}" id="signIn"><i class="fa fa-sign-in" aria-hidden="true"></i>Sign In</a>
+  
+    <a href="{% url 'register_page' %}"  id="signIn"><i class="fa fa-user-plus" aria-hidden="true"></i>
+    register</a>
+{% endif %}
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+          {%if request.user.is_authenticated%}
+           <a href="http://trendpinger.com/user-view/"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingergreen.png"></a>
+          {%else%}
+           <a href="http://trendpinger.com"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingergreen.png"></a>
+          {%endif%}
+   <div id="loading" class="sk-cube-grid">
+    <div class="sk-cube sk-cube1"></div>
+    <div class="sk-cube sk-cube2"></div>
+    <div class="sk-cube sk-cube3"></div>
+    <div class="sk-cube sk-cube4"></div>
+    <div class="sk-cube sk-cube5"></div>
+    <div class="sk-cube sk-cube6"></div>
+    <div class="sk-cube sk-cube7"></div>
+    <div class="sk-cube sk-cube8"></div>
+    <div class="sk-cube sk-cube9"></div>
+   </div>
+   <div id="mywrapper">
+    {% if request.user.is_authenticated %}
+    <form class="form-inline" action="/user-view/" method="post" enctype="multipart/form-data">
+    {% else %}
+    <form class="form-inline" action="/" method="post" enctype="multipart/form-data">
+    {%endif%}
+    {{ form.non_field_errors }}
+    {% csrf_token %}
+    <div class="tradewrapper">
+    <label class="tradelabel">Choose a subreddit or group of subreddits to scan</label>
+        {{ form.subreddits.errors }}
+
+        {{ form.subreddits }}
+    
+    
+    <button type="submit" id="sign-up" class="btn btn-success btn-lg">
+    <i class="fa fa-check-square-o"></i>&nbsp;Ping</button>
+    </div>
+    </form>
+   {% if Posts %}
+       <div class="tablewrapper">
+	<table class="table" id="mytable">
+ 		<tr>
+		    <th><p>Subreddit</p></th>
+		    <th><p>Title/Link</p></th> 
+		    <th><p>% chance of making /r/all</p></th> 
+  		</tr>
+   {% for post in Posts %}
+  		<tr>
+                    
+		    <td><p>{{post.subreddit}}</p></td>
+		    <td><a href={{post.permalink}}>{{post.title}}</a></td> 
+		    <td><p>{{post.rating}}</p></td>
+  		</tr>
+ 
+   {% endfor %}
+	</table>
+       </div>
+    {% else %}
+ <div class="spacer"></div>
+   {%endif%}
+  </div>
+    </div>
+     <!--<div id="subreddit1" class="tab-pane fade">
+      <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
+     </div>
+     <div id="subreddit2" class="tab-pane fade">
+      <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
+     </div>
+       <div id="subreddit3" class="tab-pane fade">
+        <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
+      </div>
+       <div id="subreddit4" class="tab-pane fade">
+        <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
+    </div>-->
+  </div>
+</div>
+
+
+   </div>
+  </div>
+ </div> 
+ <div class="push"></div>
+</div>
+<footer id="footer">site designed by <a href="http://connellgough.com">connell gough</a></footer>
+
+</body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-101028073-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+    $("#loading").hide();
+    $("#sign-up").click(function(){
+        $("#loading").show();
+        $("#sign-up").hide();
+        $("#mywrapper").hide();
+        $("#footer").hide();
+    });
+    $("#sign-up").click(function(){
+        $("#welcomeText").hide();
+    });
+});
+</script>
+
+
+
+
+
+{% endblock %}
