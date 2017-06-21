@@ -10,14 +10,14 @@
 </div>
 <div class="contentBorder">
   <ul class="nav nav-tabs" id="pills">
-    <li class="active"><a data-toggle="tab" href="#home">Search</a></li>
-    <!--<li><a data-toggle="tab" href="#subreddit1">Menu 1</a></li>
-    <li><a data-toggle="tab" href="#subreddit2">Menu 2</a></li>
-    <li><a data-toggle="tab" href="#subreddit3">Menu 3</a></li>
-    <li><a data-toggle="tab" href="#subreddit4">Menu 4</a></li>-->
+
+    <li class="active"><a data-toggle="tab" href="#home">search for viral posts</a></li>
+    <li><a data-toggle="tab" href="#subreddit1">visualizations</a></li>
+  
+    
     {% if request.user.is_authenticated %}
 
-    <p class="generictext">welcome back, {{ request.user.username }}</p>
+    <p class="generictext1">welcome back, {{ request.user.username }}</p>
     <a href="{% url 'logout_view' %}" id="signIn"><i class="fa fa-sign-out" aria-hidden="true"></i>
     Log out</a>
 {% else %}
@@ -28,7 +28,7 @@
 {% endif %}
   </ul>
 
-  <div class="tab-content">
+  <div class="tab-content"> 
     <div id="home" class="tab-pane fade in active">
           {%if request.user.is_authenticated%}
            <a href="http://trendpinger.com/user-view/"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingergreen.png"></a>
@@ -90,18 +90,50 @@
    {%endif%}
   </div>
     </div>
-     <!--<div id="subreddit1" class="tab-pane fade">
-      <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
-     </div>
-     <div id="subreddit2" class="tab-pane fade">
-      <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
-     </div>
-       <div id="subreddit3" class="tab-pane fade">
-        <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
-      </div>
-       <div id="subreddit4" class="tab-pane fade">
-        <img src="https://s3.amazonaws.com/anonshot/7eaa418d-d070-44a6-8bea-c684aa900cd0.jpg">
-    </div>-->
+       <div id="subreddit1" class="tab-pane fade">
+      <img class="graph" src="https://s3.amazonaws.com/anonshot/graph1.png">
+
+      <img class="graph" src="https://s3.amazonaws.com/anonshot/graph2.png">
+
+      <img class="graph" src="https://s3.amazonaws.com/anonshot/graph3.png">
+      <p class="generictext">Exploring what predicts viral Reddit posts [OC]
+
+Data Source: Reddit API<br>
+
+Tools: Praw, python, sklearn, infogram<br>
+
+Bonjour reddit! When I shared a post earlier this week that showed a post’s likelihood of making the front page with different scores at the 30 minute mark it generated a lot of interest and follow up questions. I wanted to answer these with a follow up post that contained more<br> visualizations (to the tune of what people were requesting) as well as a better break down of my methodology when finding and plotting this data.<br> 
+
+To start with let me define what I mean when I say a post goes viral:<br>
+For my project “going viral” just means that a post received more than 8000 net up votes. I considered making the definition of going viral relative to the subreddit the post is in but I figured how viral a post is does not need to be a relative concept and instead works better as an absolute one.<br>
+
+The type of model I create with sklearn for these predictions was an SVM model.<br>
+
+Also, too keep the scope of this project more manageable I only collected data on viral posts from some of the more major subreddits. In total I collected 7675 posts from the following subs:<br>
+Art, AskReddit, aww, books, dataisbeautiful, DIY, Documentaries, EarthPorn, explainlikeimfive, food, funny, gaming, gifs, jokes, LifeProTips, movies, music, pics, ShowerThoughts, space, sports, tifu, todayilearned, videos and worldnews.<br>
+
+I also broke down these subs into the following groups with sample sizes in parenthesis, for some more in depth visualizations:<br>
+Visual Media (2675): Art, aww, dataisbeautiful, EarthPorn, food, gifs, videos, pics, Documentaries<br>
+Text Information (3180): AskReddit, books, explainlikeimfive, jokes, LifeProTips, todayilearned, ShowerThoughts, world news
+News Oriented (820): worldnews, sports, gaming<br>
+
+Now let me touch on each of the visualizations I have provided:<br>
+
+
+Post Score at 30 Minutes VS % Chance of Going Viral
+This chart is most similar to my original post in that it is showing different scores for a post when it is 30 minutes old on the x axis and the probability of it going viral on the y axis. As you can see, the original aggregated line is in green, while I added other lines to this graph for the different subreddit groups that I defined. The data seems to suggest that the type of subreddit something is posted in effects how many up votes the posts needs after 30 minutes to make it likely to go viral. Furthermore, if we define the competitiveness of a subreddit as how many posts it needs at the 30 minute mark to have a greater than 50% chance of going viral we can see that visual media subreddits seems to be the least competitive while news subreddits seem to be the most competitive.<br>
+
+2) Posts Age When it Got X Up Votes VS % Chance of Going Viral<br>
+This chart shows how quickly a post reaches different scores and how that effects its probability of going viral. As you can see these all seem to be roughly linear relationships and proportional.<br>
+
+3) Up Votes Minus Age in Minutes VS % Chance of Going Viral<br>
+This visualization was more of a last minute addition. As you can see as the difference between score and age increases it is more likely to go viral. Oddly though this data is not smooth and seems to swing back and forth as it goes up. This could be a result of not having enough data for accurate, smoothed results, or it could be indicative of some insight into Reddit’s underlying algorithm or some other unaccounted for variable. 
+<br>
+<br>
+
+Lastly, I know in my last post some people were flaming the shit out of me for having no clue what I am doing, and specifically for using sklearn for this project. Those criticisms were all fair as I am relatively new to ML and sklearn and honestly don’t have the best clue what I am doing. This project was actually a way for me to teach myself ML and I figured if I could share some interesting visualizations of data along the way great.</p>
+        </div>
+
   </div>
 </div>
 
