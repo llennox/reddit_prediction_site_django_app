@@ -23,5 +23,7 @@ urlpatterns = [
     url(r'^$', views.home, name='home'),
     url(r'^email/$', views.email, name='email'),
     url(r'^user-view/$', views.userView, name='user-view'),
+    url(r'^user-list/$', views.userList, name='user-list'),
+    url(r'^delete-list/(?P<listuuid>.+)$', views.deleteList, name='delete-list'),
     #url(r'^run/$', views.run, name='run'),
 ]

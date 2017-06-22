@@ -10,7 +10,7 @@ from django.core.mail import send_mail
 from users.forms import RegistrationForm, SignInForm, ChangePassForm, EmailNewPass
 import hashlib, random, string
 from django.utils import timezone
-
+from django.contrib.auth.decorators import login_required
 
 
 def logout_view(request):
@@ -73,9 +73,6 @@ def activation(request, key):
             profil.user.is_active = True
             profil.user.save()
             id_user = None
-            activation_expired = False
-            already_active = False
-            return redirect('/sign_page/')
     #If user is already active, simply display error message
     else:
         id_user = None
@@ -126,7 +123,7 @@ def reset_password(request): #send email with new password set new password, che
         u = User.objects.get(email=form.cleaned_data['email'])
         u.set_password(password)
         u.save()
-        send_mail('new password', 'hello,' + u.username + ' please log with this password and change it:' + password, 'gonnellcough@gmail.com', [form.cleaned_data['email']], fail_silently=False)
+        send_mail('new password', 'hello, please log with this password and change it http://trendpinger.com/change_password/:' + password , 'gonnellcough@gmail.com', [form.cleaned_data['email']], fail_silently=False)
         success = True
         return render(request,'passwordsent.html',{'success': success})
     
@@ -163,7 +160,7 @@ def sign_page(request):
     return render(request, 'sign_in.html', {'form':sign_in_form, 'disabled_account': disabled_account, 'incorrect':incorrect_pass_or_username})#add error messages here!!!! 
 
 
-
+@login_required(login_url='/sign_page/')
 def change_password(request):
     successful = False
     form = ChangePassForm(request.POST)

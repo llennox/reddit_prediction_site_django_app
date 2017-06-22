@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from sklearn.externals import joblib
 import praw
 import datetime
@@ -6,8 +6,10 @@ from operator import attrgetter
 import sys
 import numpy as np
 from mc.forms import subs, EmailNewPass, Usersubs
-from mc.models import TheEmails
+from mc.models import UserList
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.cache import never_cache
+
 
 class Post:
         def __init__(self, subreddit, author, title, score, numOfComments, permalink, diff_minutes):
@@ -51,12 +53,20 @@ def email(request):
         emailSaved = False
         return render(request, 'home.html',{'form':form, 'emailSaved':emailSaved})
 
-
+@never_cache
 @login_required(login_url='/sign_page/')
 def userView(request):
+    
+    try:
+        customlist = UserList.objects.filter(username=request.user.username)
+        print(customlist)
+    except:
+        customlist = None
+
+    
     trendingPosts = []
     if request.method == 'POST':
-        form = Usersubs(request.POST)
+        form = subs(request.POST)
         if form.is_valid():
             subreddit = form.cleaned_data['subreddits']
 
@@ -72,13 +82,60 @@ def userView(request):
                 post.rating=post.rating * 100 
                 post.rating = round(post.rating, 2)
         form = Usersubs()
-        return render(request,'home.html', {'Posts':trendingPosts,'form':form})
+        return render(request,'user.html', {'Posts':trendingPosts,'form':form,'customlist':customlist})
     form = Usersubs()
-    return render(request,'home.html', {'Posts':trendingPosts,'form':form})
+
+    return render(request,'user.html', {'Posts':trendingPosts,'form':form,'customlist':customlist})
 
 
+@never_cache
+@login_required(login_url='/sign_page/')
+def deleteList(request, listuuid):
+    l = UserList.objects.get(listuuid=listuuid)
+    if request.user.username == l.username:
+        l.delete()
+    return redirect('/user-list/')
+
+@never_cache
+@login_required(login_url='/sign_page/')
+def userList(request):
+    try:
+        customlist = UserList.objects.filter(username=request.user.username)
+       
+    except:
+        customlist = []
+
+    l=None   
+    if request.method == 'POST' and len(customlist) <= 10:
+        subs = request.POST.getlist('subreddits')
+        label = request.POST.get('label')
+        if len(subs) <= 10:
+            itemlist = ''
+            counter = False
+            for item in subs:
+                if item:
+                    if counter == False:
+                        counter = True
+                        itemlist = itemlist + item
+                    else:
+                        itemlist = itemlist + ',' + item               
+        l = UserList(username=request.user.username,subreddits=itemlist,label=label)
+        l.save()
+        try:
+            customlist = UserList.objects.filter(username=request.user.username)
+        
+        except:
+            customlist = []
+
+        request.method = 'GET'
+        return render(request, 'userlist.html',{'customlist':customlist})
+    return render(request, 'userlist.html',{'customlist':customlist})
+
+@never_cache
 def home(request):
     trendingPosts = []
+
+
     if request.method == 'POST':
         form = subs(request.POST)
         if form.is_valid():
@@ -129,18 +186,17 @@ def returnTrending(subreddit, trendingPosts):
         for filler2 in fillers:
            if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
                numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
-        if filler.score > 10:
-            prediction = svm.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
-        
-            if len(trendingPosts) >= 15:
-               if trendingPosts[14].rating < prediction[0][1]:
-                   trendingPosts.pop()
-                   trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
-                   trendingPosts.sort(key=lambda x: x.rating, reverse=True)
-            else:
-                trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
-                if len(trendingPosts) == 15:
-                    trendingPosts.sort(key=lambda x: x.rating, reverse=True)
+
+        prediction = svm.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
+        if len(trendingPosts) >= 15:
+           if trendingPosts[14].rating < prediction[0][1]:
+               trendingPosts.pop()
+               trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
+               trendingPosts.sort(key=lambda x: x.rating, reverse=True)
+        else:
+            trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
+            if len(trendingPosts) == 15:
+                trendingPosts.sort(key=lambda x: x.rating, reverse=True)
        
     return trendingPosts
 
