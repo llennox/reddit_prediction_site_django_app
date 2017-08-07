@@ -462,27 +462,9 @@ def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content
                         getFillers(submission, fillers, subreddit)
 
                     fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, 'all')
-                    fillers3 = filter_posts_with_content_tags_and_type(fillers, 'none', content_type)# ask meownow about these lines 
+                    fillers3 = filter_posts_with_content_tags_and_type(fillers2, 'none', content_type)# ask meownow about these lines 
                     
-                    for filler in fillers3:
-                        numberOfHotterPostsInSub = 0
-                        for filler2 in fillers:
-                           if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
-                               numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
-
-                        prediction = svm.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
-                        if prediction[0][1] > float(minimum_chance_to_go_viral):
-                            if len(trendingPosts) >= number_of_post_to_return:
-                               if trendingPosts[number_of_post_to_return-1].rating < prediction[0][1]:
-                                   trendingPosts.pop()
-                                   trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
-                                   trendingPosts.sort(key=lambda x: x.rating, reverse=True)
-                            else:
-                                trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
-                                if len(trendingPosts) == number_of_post_to_return:
-                                    trendingPosts.sort(key=lambda x: x.rating, reverse=True)
-                    
-                return trendingPosts
+                    return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
     else:
         subreddits_to_search = specific_subreddits.split(',')
         if content_type == 'all':
@@ -522,27 +504,9 @@ def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content
                         getFillers(submission, fillers, subreddit)
 
                     fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, 'all')
-                    fillers3 = filter_posts_with_content_tags_and_type(fillers, 'none', content_type)
+                    fillers3 = filter_posts_with_content_tags_and_type(fillers2, 'none', content_type)
                     
-                    for filler in fillers3:
-                        numberOfHotterPostsInSub = 0
-                        for filler2 in fillers:
-                           if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
-                               numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
-
-                        prediction = svm.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
-                        if prediction[0][1] > float(minimum_chance_to_go_viral):
-                            if len(trendingPosts) >= number_of_post_to_return:
-                               if trendingPosts[number_of_post_to_return-1].rating < prediction[0][1]:
-                                   trendingPosts.pop()
-                                   trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
-                                   trendingPosts.sort(key=lambda x: x.rating, reverse=True)
-                            else:
-                                trendingPosts.append(HotPost(filler.subreddit, filler.title, "http://www.reddit.com/" + filler.permalink, prediction[0][1]))
-                                if len(trendingPosts) == number_of_post_to_return:
-                                    trendingPosts.sort(key=lambda x: x.rating, reverse=True)
-                    
-                return trendingPosts
+                    return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
 
 
 
