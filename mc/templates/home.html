@@ -31,9 +31,9 @@
   <div class="tab-content"> 
     <div id="home" class="tab-pane fade in active">
           {%if request.user.is_authenticated%}
-           <a href="{% url 'logout_view' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingergreen.png"></a>
+           <a href="{% url 'logout_view' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingerwhite.png"></a>
           {%else%}
-           <a href="{% url 'home' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingergreen.png"></a>
+           <a href="{% url 'home' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingerwhite.png"></a>
           {%endif%}
     <p class="generictext">search reddit for upcoming viral posts with machine learning, unlock more tools by registering</p>
    <div id="loading" class="sk-cube-grid">
@@ -66,6 +66,29 @@
     <i class="fa fa-check-square-o"></i>&nbsp;Ping</button>
     </div>
     </form>
+   {% if bestPost %}
+     <p class="generictextb">One very hot post <i class="fa fa-level-down" aria-hidden="true"></i></p>
+       <div class="tablewrapper">
+	<table class="table" id="mytable">
+ 		<tr>
+		    <th><p>subreddit</p></th>
+		    <th><p>link</p></th> 
+                    <th><p>score</p></th> 
+                    <th><p>chance of going viral</p></th>  
+  		</tr>
+   
+  		<tr>
+                    
+		    <td><p>{{bestPost.subreddit}}</p></td>
+		    <td><a href="https://reddit.com{{bestPost.permalink}}">{{bestPost.title}}</a></td> 
+		    <td><p>{{bestPost.score}}</p></td>
+                    <td><p>{{bestPost.chance_to_go_viral}}</p></td>
+                    
+  		</tr>
+          </table>
+       </div>
+   <div class="spacer"></div>
+   {%endif%}
    {% if Posts %}
        <div class="tablewrapper">
 	<table class="table" id="mytable">
@@ -85,8 +108,7 @@
    {% endfor %}
 	</table>
        </div>
-    {% else %}
- <div class="spacer"></div>
+ 
    {%endif%}
   </div>
     </div>

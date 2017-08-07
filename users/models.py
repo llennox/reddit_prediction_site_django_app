@@ -8,8 +8,6 @@ class Profil(models.Model):
     activation_key = models.CharField(max_length=40)
     key_expires = models.DateTimeField()
     user_uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False) 
-    verified_dispensary = models.CharField(max_length=2, null=True)
-    verified_distributer = models.CharField(max_length=2, null=True)
-    grower = models.BooleanField(default=False)
-    medical = models.CharField(max_length=2, null=True)
-    
+    userToken = models.CharField(max_length=200,null=True)   
+    tokenQueries = models.FloatField(null=True)
+    billing = models.NullBooleanField()

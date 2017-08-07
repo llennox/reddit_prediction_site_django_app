@@ -25,5 +25,7 @@ urlpatterns = [
     url(r'^user-view/$', views.userView, name='user-view'),
     url(r'^user-list/$', views.userList, name='user-list'),
     url(r'^delete-list/(?P<listuuid>.+)$', views.deleteList, name='delete-list'),
-    #url(r'^run/$', views.run, name='run'),
+    url(r'^api/docs/$', views.apiDocs, name='api-docs'),
+    url(r'^api/reddit-search/(.+)/(.+)/(.+)/(.+)/(.+)/(.+)$', views.GetHottestPosts.as_view(), name='reddit-search'),
+    
 ]

@@ -1,0 +1,91 @@
+{% extends "base.html" %}
+{% block content %}
+{% load staticfiles %}
+<title>reddit post prediction</title>
+<body class="background">
+<div class="contentBorder">
+<ul class="nav nav-tabs" id="pills">
+
+    <li class="active"><a data-toggle="tab" href="#home">search for viral posts</a></li>
+    
+
+
+    <p class="generictext1">welcome back, {{ request.user.username }}</p>
+     <a href="{% url 'logout_view' %}" id="signIn"><i class="fa fa-sign-out" aria-hidden="true"></i>
+    Log out</a>
+  </ul>
+
+  <div class="tab-content"> 
+    <div id="home" class="tab-pane fade in active">
+     
+           <a href="{% url 'user-view' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingerwhite.png"></a>
+<h1 class="landing-header2">create your own list</h1>
+    <form class="form-inline" action="/user-list/" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="tradewrapper">
+    <label class="tradelabel">add subreddits</label>
+        <input name="subreddits" type="hidden">
+        <div id="divgrid" >
+         
+        </div>
+        </input>
+       <input id="subreddits" class='form-control' placeholder="enter a subreddit" type='text'>
+    
+    
+    <button type="button" id="addinput" class="btn btn-success btn-lg">
+    <i class="fa fa-plus"></i>&nbsp;add</button>
+    <input name="label" class='form-control' placeholder="list label" type='text'>
+    <button type="submit" id="sign-up" class="btn btn-success btn-lg">
+    <i class="fa fa-check-square-o"></i>&nbsp;save</button>
+    </div>
+    </form>
+
+  </div>
+   {% if customlist %}
+       <div class="tablewrapper">
+	<table class="table" id="mytable">
+   {% for post in customlist %}
+  		<tr>
+		    <td><p>{{post.subreddits}}</p></td>
+		    <td><p>{{post.label}}<p></td> 
+		    <td><a href="{% url 'delete-list' post.listuuid %}">delete</p></td>
+  		</tr>
+ 
+   {% endfor %}
+	</table>
+       </div>
+    {% else %}
+ <div class="spacer"></div>
+   {%endif%}
+ </div>
+</div>
+</body>
+
+<script type="text/javascript" >
+var counter = 0;
+
+$("#optionbutton1").click(function(){
+    $("#footer").hide();
+    counter = counter - 1;
+});
+$("#addinput").click(function(){
+counter++;
+if (counter >= 11) {
+    document.getElementById('subreddits').value = 'maximum of 10 subreddits',
+    document.getElementById('addinput').hide();
+}
+
+$('#divgrid').append($('<button>', {
+    id : 'optionbutton' + counter,
+    type : 'button',
+    class: 'btn btn-basic btn-sm',
+}));
+var value = document.getElementById('subreddits').value
+document.getElementById('optionbutton' + counter).innerHTML= '<input type="hidden" name="subreddits" value=' + value + '><option class="generictext2" value=' + value + '>' + value + ' X</option>';
+
+document.getElementById('subreddits').value= '';
+});
+
+</script>
+
+{% endblock %}

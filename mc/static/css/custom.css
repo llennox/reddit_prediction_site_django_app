@@ -3,8 +3,8 @@
 
 html {width:100%;overflow-x: hidden;}
 
-#signIn {color:white;margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;}
-#forminput {color:white;margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;}
+#signIn {color:black;margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;}
+#forminput {color:black;margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;}
 .login {
         width:20%;
         top:0;
@@ -13,33 +13,42 @@ html {width:100%;overflow-x: hidden;}
         
 }
 
-#optionbutton:hover {background-color:#258058 !important;}
+#optionbutton:hover {background-color:#f6f6f6 !important;}
+.userlistlink {font-family: Ubuntu, sans-serif;font-size:130%;color:white;font-weight:bold;}
 
+.userlistlink:hover {font-family: Ubuntu, sans-serif;font-size:130%;color:black;font-weight:bold;}
 
 
 .graph {height:auto;width:100%;opacity:1.0;margin-top:3%;}
 .generictext2   {font-family: Ubuntu, sans-serif;font-size:110%;color:black;font-weight:bold;}
 
-.generictext{font-family: Ubuntu, sans-serif;font-size:110%;color:white;}
-
-.generictext1 {font-family: Ubuntu, sans-serif;font-size:110%;color:white;position:relative;margin:0;float:right;margin-right:5%;}
+.generictext  {font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
+.generictextb  {font-family: Ubuntu, sans-serif;font-size:180%;color:black;}
+.generictext1 {font-family: Ubuntu, sans-serif;font-size:110%;color:black;position:relative;margin:0;float:right;margin-right:5%;}
 .spacer {margin-bottom:22%;height:30%;width:100%;}
 .push {height:20px;}
-footer {height:20px;color:white; bottom:0; float:left;left:0;}
+footer {height:20px;color:black; bottom:0; float:left;left:0;}
 footer a {color:#777777;}
 footer a:hover {color:orange;}
-#mytable td {background-color:white;font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
+#mytable td {background-color:#f6f6f6;font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
 
-#mytable tr {background-color:white;font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
+#mytable tr {background-color:#f6f6f6;font-family: Ubuntu, sans-serif;font-size:110%;color:black;}
 
 
 
-#signIn:hover {margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;text-decoration:none;color:#ff6600;}
+#signIn:hover {margin: 2% 2% 0 0;float:right;font-size:120%;opacity:1;margin-top:-0.1%;text-decoration:none;color:#f6f6f6;}
 
-.active {color:#258058}
+.active {color:black}
+
+@media only screen and (max-width: 500px) {
+.logoimg {margin-top:3%;width:178px;height:37px;}
+
+}
+
+@media only screen and (min-width: 500px) {
 
 .logoimg {margin-top:3%;width:750px;height:158px;}
-
+}
 
 .tradelabel {color:white;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
 
@@ -47,9 +56,9 @@ footer a:hover {color:orange;}
 
 
 
-#pills li a {color:white;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
+#pills li a {color:black;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
 
-#pills .active a {background-color:#258058;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
+#pills .active a {background-color:#f6f6f6;font-family: Ubuntu, sans-serif;font-size:120%;font-weight:bold;}
 
 
 
@@ -61,12 +70,12 @@ footer a:hover {color:orange;}
 
 form input {margin:1% 0 1% 0;}
 
-.userlabel {color:white;}
+.userlabel {color:black;}
 
-.allText {color:white;}
+.allText {color:black;}
 
 .background{ 
-    background-color: #204367;
+    background-color: white;
     width:auto;
     height:100%;
     margin 0 0 0 0;
@@ -94,7 +103,7 @@ form input {margin:1% 0 1% 0;}
 
 
 .landing-header2 {
-    color:white;
+    color:black;
     font-family: Ubuntu, sans-serif;
     margin-top:4%;
 }
