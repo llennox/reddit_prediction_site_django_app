@@ -522,10 +522,12 @@ def filter_posts_with_content_tags_and_type(postsToAnalyze, content_tags_to_find
             
 
             for word_in_title in title_list:
+             
                 for content_tag in content_tags_to_find_list:
-                    matched = True
-                    filtered_posts.append(post_to_analyzie)
-                    break
+                    if word_in_title == content_tag:
+                        matched = True
+                        filtered_posts.append(post_to_analyzie)
+                        break
                 if matched == True:
                     break
             if matched == True:
