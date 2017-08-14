@@ -72,7 +72,7 @@ class BestPost:
 
 
 
-svm = joblib.load('/home/connlloc/sites/mc/modelSvm.pkl')
+rfc = joblib.load('/home/gene-art/sites/reddit_prediction_site_django_app/reddit_rf_model.pkl')
 trendingPosts = []
 
 def apiDocs(request):
@@ -192,7 +192,7 @@ def get_hottest_subs():
                     if diff_minutes == 0:
                         diff_minutes = 1
                     if diff_minutes < 140:
-                        prediction = svm.predict_proba([[score,numOfComments,diff_minutes,0]])
+                        prediction = rfc.predict_proba([[score,numOfComments,diff_minutes,0]])
 
                         if prediction[0][1] > 0.60:
                             chance_to_go_viral = prediction[0][1]
@@ -374,7 +374,7 @@ def returnTrending(subreddit, trendingPosts):
            if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
                numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
 
-        prediction = svm.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
+        prediction = rfc.fit([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
         if len(trendingPosts) >= 15:
            if trendingPosts[14].rating < prediction[0][1]:
                trendingPosts.pop()
@@ -394,7 +394,7 @@ def makePredictions(fillers, minimum_chance_to_go_viral, number_of_post_to_retur
             if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
                 numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
 
-        prediction = svm.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
+        prediction = rfc.fit([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
         if prediction[0][1] > float(minimum_chance_to_go_viral):
             if len(trendingPosts) >= number_of_post_to_return:
                 if trendingPosts[number_of_post_to_return-1].rating < prediction[0][1]:
@@ -517,12 +517,13 @@ def filter_posts_with_content_tags_and_type(postsToAnalyze, content_tags_to_find
     if content_tags_to_find != 'none' and content_type_to_find == 'all':
         matched = False
         content_tags_to_find_list = content_tags_to_find.split(',')
+        for cc in content_tags_to_find_list:
+            print(cc)
         for post_to_analyzie in postsToAnalyze:
             title_list =  post_to_analyzie.title.split(' ')
             
 
             for word_in_title in title_list:
-             
                 for content_tag in content_tags_to_find_list:
                     if word_in_title == content_tag:
                         matched = True
@@ -540,6 +541,7 @@ def filter_posts_with_content_tags_and_type(postsToAnalyze, content_tags_to_find
 
                 for content_tag_to_find in content_tags_to_find_list:
                     for tag in contentTags:
+                        print(tag)
                         if tag == content_tag_to_find:
                             matched = True
                             filtered_posts.append(post_to_analyzie)
@@ -913,7 +915,7 @@ def filter_posts_with_content_tags_and_type(postsToAnalyze, content_tags_to_find
 
 def detect_labels_uri(uri):
     #vision_client = vision.Client()
-    vision_client = vision.Client.from_service_account_json("/home/connlloc/sites/mc/ViralAI-123c69d3bd0b.json")
+    vision_client = vision.Client.from_service_account_json("/Users/mark/Downloads/viralai-master/ViralAI-123c69d3bd0b.json")
     image = vision_client.image(source_uri=uri)
     labels = image.detect_labels()
     #print('Labels:')
