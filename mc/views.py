@@ -374,7 +374,7 @@ def returnTrending(subreddit, trendingPosts):
            if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
                numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
 
-        prediction = rfc.fit([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
+        prediction = rfc.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
         if len(trendingPosts) >= 15:
            if trendingPosts[14].rating < prediction[0][1]:
                trendingPosts.pop()
@@ -394,7 +394,7 @@ def makePredictions(fillers, minimum_chance_to_go_viral, number_of_post_to_retur
             if filler.score/filler.diff_minutes > filler2.score/filler2.diff_minutes:                                              
                 numberOfHotterPostsInSub = numberOfHotterPostsInSub + 1
 
-        prediction = rfc.fit([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
+        prediction = rfc.predict_proba([[filler.score,filler.numOfComments,filler.diff_minutes,numberOfHotterPostsInSub]])
         if prediction[0][1] > float(minimum_chance_to_go_viral):
             if len(trendingPosts) >= number_of_post_to_return:
                 if trendingPosts[number_of_post_to_return-1].rating < prediction[0][1]:
