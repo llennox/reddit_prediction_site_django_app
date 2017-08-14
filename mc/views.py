@@ -72,7 +72,7 @@ class BestPost:
 
 
 
-rfc = joblib.load('/home/gene-art/sites/reddit_prediction_site_django_app/reddit_rf_model.pkl')
+rfc = joblib.load('/home/connlloc/sites/mc/modelSvm.pkl')
 trendingPosts = []
 
 def apiDocs(request):
@@ -429,18 +429,22 @@ def getFillers(submission, fillers, subreddit):
 
 def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content_tags, specific_subreddits, number_of_post_to_return, trendingPosts):
     if specific_subreddits == 'none':
+
         subreddits_to_search = [ "pics", "politics", "worldnews", "news", "videos", "gifs"]
         if content_type == 'all':
+
             if specific_content_tags == 'none':
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=75):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
                 return makePredictions(fillers, minimum_chance_to_go_viral,number_of_post_to_return)
             else:
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
 
                 fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, content_type)
@@ -448,9 +452,10 @@ def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content
         else:
 
             if specific_content_tags == 'none':
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
                 fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, content_type)   
                 return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
@@ -458,7 +463,7 @@ def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content
 
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
 
                     fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, 'all')
@@ -466,31 +471,36 @@ def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content
                     
                     return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
     else:
+
         subreddits_to_search = specific_subreddits.split(',')
         if content_type == 'all':
+
             if specific_content_tags == 'none':
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
 
                     return makePredictions(fillers, minimum_chance_to_go_viral,number_of_post_to_return)
             else:
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
 
                 fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, content_type)
                     
                 return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
         else:
+
             content_types_to_search = content_type.split(",")
             if specific_content_tags == 'none':
-                
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
 
                 fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, content_type)
@@ -498,15 +508,17 @@ def returnTrendingAPI(minimum_chance_to_go_viral, content_type, specific_content
                 return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
 
             else:
+
                 fillers = []
                 for subreddit in subreddits_to_search:
-                    for submission in reddit.subreddit(subreddit).new(limit=5):
+                    for submission in reddit.subreddit(subreddit).new(limit=int(number_of_post_to_return)):
                         getFillers(submission, fillers, subreddit)
 
                     fillers2 = filter_posts_with_content_tags_and_type(fillers, specific_content_tags, 'all')
                     fillers3 = filter_posts_with_content_tags_and_type(fillers2, 'none', content_type)
                     
                     return makePredictions(fillers2, minimum_chance_to_go_viral,number_of_post_to_return)
+
 
 
 
