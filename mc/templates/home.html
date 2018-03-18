@@ -31,9 +31,9 @@
   <div class="tab-content"> 
     <div id="home" class="tab-pane fade in active">
           {%if request.user.is_authenticated%}
-           <a href="{% url 'logout_view' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingerwhite.png"></a>
+           <a href="{% url 'logout_view' %}"><img class="logoimg" src="http://res.cloudinary.com/anonshot/image/upload/trendpingerwhite_sqbo66.png"></a>
           {%else%}
-           <a href="{% url 'home' %}"><img class="logoimg" src="https://s3.amazonaws.com/anonshot/trendpingerwhite.png"></a>
+           <a href="{% url 'home' %}"><img class="logoimg" src="http://res.cloudinary.com/anonshot/image/upload/trendpingerwhite_sqbo66.png"></a>
           {%endif%}
     <p class="generictext">search reddit for upcoming viral posts with machine learning, unlock more tools by registering</p>
    <div id="loading" class="sk-cube-grid">
